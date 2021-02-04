@@ -45,16 +45,37 @@ void mymemcpy(void* dst, const void* src, size_t num) {
     const int* pintsrc = (const int*)src;
     int* pintdst = (int*)dst;
 
-    // copy 4 bytes
-    while (wordNum--) {
-        *pintdst++ = *pintsrc++;
-    }
+    if (pintsrc > pintdst && pintdst < pintsrc + num) {
+        // dst > 且覆盖src后一段，从后向前复制
+        pintdst += num;
+        pintsrc += num;
+        while (wordNum--) {
+            *pintdst-- = *pintsrc--;
+        }
 
-    // copy one byte
-    const char* pcharsrc = (const char*)pintsrc;
-    char* pchardst = (char*)pintdst;
-    
-    while (slice--) {
-        *pchardst++ = *pcharsrc++;
+        // copy one byte
+        const char* pcharsrc = (const char*)pintsrc;
+        char* pchardst = (char*)pintdst;
+
+        while (slice--) {
+            *pchardst-- = *pcharsrc--;
+        }
+        for (size_t i = num - 1; i != -1; i--) {
+            pdst[i] = psrc[i];
+        }
+    } else {
+        // dst < src ，及其它情况从前面复制即可
+        // copy 4 bytes
+        while (wordNum--) {
+            *pintdst++ = *pintsrc++;
+        }
+
+        // copy one byte
+        const char* pcharsrc = (const char*)pintsrc;
+        char* pchardst = (char*)pintdst;
+
+        while (slice--) {
+            *pchardst++ = *pcharsrc++;
+        }
     }
 }
