@@ -108,6 +108,7 @@ private:
 
             return res;
         }
+        return -1;
     }
 };
 
