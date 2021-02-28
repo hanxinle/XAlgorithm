@@ -28,7 +28,6 @@ private:
 
    int capacity;
    unordered_map<int, Node*> data;
-
    Node * dummyHead;
    Node * tail;
 
@@ -50,7 +49,6 @@ public:
            cur = nullptr;
            cur = p;
        }
-
    }
 
    void put(int key, int value) {
@@ -74,7 +72,6 @@ public:
            moveToHead(data[key]);
            return dummyHead->next->val;
        }
-
        return -1;
    }
 private:
