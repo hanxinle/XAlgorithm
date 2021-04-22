@@ -37,7 +37,7 @@ void mymemcpy(void* dst, const void* src, size_t num) {
 
 // 如何优化这个算法，一次拷贝的内容增多
 // 只演示从前向后拷贝，从后向前拷贝待补充
-void mymemcpy(void* dst, const void* src, size_t num) {
+void xmemcpy(void* dst, const void* src, size_t num) {
     assert((dst != nullptr) && src != nullptr);
 
     int wordNum = num / 4;
