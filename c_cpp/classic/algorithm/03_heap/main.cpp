@@ -43,7 +43,7 @@
 //    int n = 1000000;
 //
 //    string name = "Heap Sort Using Index-Min-Heap";
-//    int *arr = generateRandomArray<int>(n, 0, n);
+//    int* arr = generateRandomArray<int>(n, 0, n);
 //    testSort(name, heapSortUsingIndexMinHeap, arr, n);
 //    delete[] arr;
 //
