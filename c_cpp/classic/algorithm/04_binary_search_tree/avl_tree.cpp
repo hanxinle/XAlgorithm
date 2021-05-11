@@ -24,8 +24,8 @@ private:
         Key key;
         Value value;
         int height;
-        Node *left;
-        Node *right;
+        Node* left;
+        Node* right;
 
         Node(Key key, Value value) {
             this->key = key;
@@ -34,7 +34,7 @@ private:
             this->height = 1;
         }
 
-        Node(Node * node) {
+        Node(Node* node) {
             this->key = node->key;
             this->value = node->value;
             this->left = node->left;
@@ -43,7 +43,7 @@ private:
         }
     };
 
-    Node * root;
+    Node* root;
     int count;
 
 public:
@@ -94,7 +94,7 @@ public:
      * 课程的方法是返回 value *,查找不到 key 返回 NULL，统一了查找返回的逻辑
      */
 
-    Value * search(Key key) {
+    Value* search(Key key) {
         return search(root, key);
     }
 
@@ -117,7 +117,7 @@ public:
         queue<Node*> q;
         q.push(root);
         while (!q.empty()) {
-            Node * node = q.front();
+            Node* node = q.front();
             q.pop();
             cout << node->key << endl;
 
@@ -131,13 +131,13 @@ public:
 
     Key minimum() {
         assert(count != 0);
-        Node  *minNode = mininum(root);
+        Node* minNode = mininum(root);
         return minNode->key;
     }
 
     Key maxinum() {
         assert(count != 0);
-        Node  *maxiNode = maxiNode(root);
+        Node* maxiNode = maxiNode(root);
         return maxiNode->key;
     }
     //// 下面两个删除算法适用于只有一个孩子的节点
@@ -158,20 +158,20 @@ public:
     }
 private:
     // 节点高度
-    int getHeight(Node *node) {
+    int getHeight(Node* node) {
         if (node == nullptr)
             return 0;
         return node->height;
     }
 
     // 节点的平衡因子
-    int getBalanceFactor(Node * node) {
+    int getBalanceFactor(Node* node) {
         if (node == nullptr)
             return 0;
         return getHeight(node->left) - getHeight(node->right);
     }
 
-    bool isBalanced(Node * node) {
+    bool isBalanced(Node* node) {
         if (node == nullptr)
             return true;
 
@@ -183,7 +183,7 @@ private:
 
     // 向以node为根的二分搜索树中, 插入节点(key, value), 使用递归算法
     // 返回插入新节点后的二分搜索树的根
-    Node *insert(Node *node, Key key, Value value) {
+    Node* insert(Node* node, Key key, Value value) {
         if (node == NULL) {
             count++;
             return new Node(key, value);
@@ -232,9 +232,9 @@ private:
     //    z   T3                       T1  T2 T3 T4
     //   / \
     // T1   T2
-    Node *rightRotate(Node *y) {
-        Node * x = y->left;
-        Node * t3 = x->right;
+    Node* rightRotate(Node* y) {
+        Node* x = y->left;
+        Node* t3 = x->right;
 
         x->right = y;
         y->left = t3;
@@ -253,10 +253,10 @@ private:
     //   T2  z                     T1 T2 T3 T4
     //      / \
     //     T3 T4
-    Node *leftRotate(Node *y) {
+    Node* leftRotate(Node* y) {
 
-        Node * x = y->right;
-        Node *t2 = x->left;
+        Node* x = y->right;
+        Node* t2 = x->left;
 
         x->left = y;
         y->right = t2;
@@ -270,7 +270,7 @@ private:
 
 
 
-    bool contain(Node *node, Key key) {
+    bool contain(Node* node, Key key) {
         if (node == NULL)
             return false;
         if (key == node->key)
@@ -281,7 +281,7 @@ private:
             return contain(node->right, key);
     }
 
-    Value *search(Node *node, Key key) {
+    Value* search(Node* node, Key key) {
         if (node == NULL)
             return NULL;
 
@@ -292,31 +292,32 @@ private:
         else //key > node->key
             return search(node->right, key);
     }
-
-    void preOrder(Node *node) {
+    // 前序
+    void preOrder(Node* node) {
         if (node != NULL)
             cout << node->key << endl;
         preOrder(node->left);
         preOrder(node->right);
     }
-
-    void inOrder(Node *node) {
+    // 中序
+    void inOrder(Node* node) {
         if (node != NULL) {
             inOrder(node->left);
             cout << node->key << endl;
             inOrder(node->right);
         }
     }
-
-    void  inOrder(Node *node, vector<Key> &vec) {
+    // 中序遍历，并且将节点数据域存储于vec
+    // 相当于进行排序
+    void  inOrder(Node* node, vector<Key>& vec) {
         if (node == nullptr)
             return;
         inOrder(node->left, vec);
         vec.push_back(node->key);
         inOrder(node->right, vec);
     }
-
-    void postOrder(Node *node) {
+    // 后序遍历
+    void postOrder(Node* node) {
         if (node != NULL) {
             postOrder(node->left);
             postOrder(node->right);
@@ -324,7 +325,7 @@ private:
         }
     }
 
-    void destroy(Node *node) {
+    void destroy(Node* node) {
         if (node != NULL) {
             destroy(node->left);
             destroy(node->right);
@@ -334,13 +335,13 @@ private:
         }
     }
 
-    Node *mininum(Node * node) {
+    Node* mininum(Node* node) {
         if (node->left == NULL)
             return node;
         return mininum(node->left);
     }
 
-    Node *maxinum(Node * node) {
+    Node* maxinum(Node* node) {
         if (node->right == NULL)
             return node;
         return maxinum(node->right);
@@ -376,36 +377,34 @@ private:
 
     // 删除以 node 为根的 bst 中的 key 节点，该节点有两个孩子
     // 返回删除节点后的新的 bst
-    Node * remove(Node *node, Key key) {
+    Node* remove(Node* node, Key key) {
         if (node == nullptr)
             return nullptr;
-        Node * retNode;
+        Node* retNode;
         if (key < node->key) {
             node->left = remove(node->left, key);
             retNode = node;
-        }
-        else if (key > node->key) {
+        } else if (key > node->key) {
             node->right = remove(node->left, key);
             retNode = node;
-        }
-        else { // 找到了节点
+        } else { // 找到了节点
             // 左孩子或左右孩子都为空
             if (node->left == nullptr) {
-                Node *rightNode = node->right;
+                Node* rightNode = node->right;
                 delete node;
                 count--;
                 retNode = rightNode;
             }
 
             else if (node->right == nullptr) {
-                Node * leftNode = node->left;
+                Node* leftNode = node->left;
                 delete node;
                 count--;
                 retNode = leftNode;
             }
             // 左右孩子都存在
             else {
-                Node * newNode = new Node(mininum(node->right));
+                Node* newNode = new Node(mininum(node->right));
                 count++;
 
                 newNode->right = remove(node->right, newNode->key);
@@ -458,8 +457,8 @@ int main() {
         // 在这里只做性能测试用
         AVL<string, int> bst = AVL<string, int>();
         for (vector<string>::iterator iter = words.begin(); iter != words.end();
-            iter++) {
-            int *res = bst.search(*iter);
+             iter++) {
+            int* res = bst.search(*iter);
             if (res == NULL)
                 bst.insert(*iter, 1);
             else
@@ -492,6 +491,3 @@ int main() {
     }
     return 0;
 }
-
-
-

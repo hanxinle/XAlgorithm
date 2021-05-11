@@ -23,7 +23,7 @@
     <ProjectGuid>{15CC9206-37EE-49EB-ADF8-9BC81B9AC0DA}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>My00basicsort</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
     <ProjectName>01_basic_sort</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
