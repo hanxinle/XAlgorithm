@@ -25,17 +25,17 @@ template <typename T> void __merge(T arr[], int l, int mid, int r) {
     int i = l, j = mid + 1;
 
     for (int k = l; k <= r; ++k) {
-
-        //判断索引合法性
+        //将辅助数组元素归并到原始数组
+        //左部分都移动完毕
         if (i > mid) {
             arr[k] = aux[j - l];
             ++j;
-        } else if (j > r) {
+        } else if (j > r) {//右部分都移动完毕
             arr[k] = aux[i - l];
             ++i;
         }
 
-        //将辅助数组元素归并到原始数组
+        //一般情况：将辅助数组元素归并到原始数组
 
         else if (aux[i - l] < aux[j - l]) {
             arr[k] = aux[i - l];
